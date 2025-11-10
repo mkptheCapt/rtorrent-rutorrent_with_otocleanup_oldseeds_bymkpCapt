@@ -1,0 +1,77 @@
+# ============================================================================
+# HASSAS BİLGİLER - GİT'E YÜKLEME!
+# ============================================================================
+
+# Kullanıcı adı ve şifre dosyaları
+.env
+.env.local
+passwd/
+
+# Cleanup scripti (kullanıcıya özel)
+rtorrent-cleanup.sh
+
+# ============================================================================
+# LOKAL VERİTABANI VE SESİON DOSYALARI
+# ============================================================================
+
+# rTorrent yapılandırması ve session dosyaları
+data/
+downloads/
+
+# Log dosyaları
+*.log
+logs/
+cleanup.log
+
+# ============================================================================
+# GENEL IDE/EDITOR DOSYALARI
+# ============================================================================
+
+# VS Code
+.vscode/
+*.code-workspace
+
+# JetBrains IDEs
+.idea/
+*.iml
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ============================================================================
+# İŞLETİM SİSTEMİ DOSYALARI
+# ============================================================================
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Linux
+.directory
+
+# ============================================================================
+# DOCKER DOSYALARI
+# ============================================================================
+
+# Docker compose override
+docker-compose.override.yml
+
+# ============================================================================
+# BACKUP VE GEÇİCİ DOSYALAR
+# ============================================================================
+
+*.backup
+*.bak
+*.tmp
+*.temp
