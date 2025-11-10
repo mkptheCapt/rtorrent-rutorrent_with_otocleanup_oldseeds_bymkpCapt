@@ -1,0 +1,78 @@
+services:
+  rtorrent-rutorrent:
+    # Docker imajı (crazy-max'in resmi rtorrent-rutorrent imajı)
+    # Bu imaj rTorrent, ruTorrent, Nginx ve PHP-FPM içerir
+    image: crazymax/rtorrent-rutorrent:latest
+    
+    # Container adı (docker komutlarında kullanılır)
+    container_name: rtorrent-rutorrent
+    
+    # Otomatik yeniden başlatma politikası
+    # unless-stopped: VPS yeniden başlarsa container da başlasın
+    restart: unless-stopped
+    
+    # Ağ modu: host = VPS'nin network yapısını doğrudan kullan
+    network_mode: "host"
+    
+    # Çevre değişkenleri (yapılandırma parametreleri)
+    environment:
+      # Saat dilimi (kurulumda sorulacak)
+      - TZ=${TIMEZONE}
+      
+      # Kullanıcı ve grup ID'leri
+      - PUID=1000
+      - PGID=1000
+      
+      # VPS'nin genel IP adresi (Tracker'lara bildirilecek)
+      - WAN_IP=${WAN_IP}
+      
+      # PHP bellek limiti
+      - MEMORY_LIMIT=512M
+      
+      # Maksimum upload boyutu (torrent dosyası yükleme için)
+      - UPLOAD_MAX_SIZE=32M
+      
+      # ruTorrent HTTP portu
+      - RUTORRENT_PORT=8080
+      
+      # ruTorrent giriş ekranında gösterilecek mesaj
+      - RUTORRENT_AUTHBASIC_STRING=ruTorrent Erisim - Kullanici Adi ve Sifre Gerekli
+      
+      # XMLRPC portu (rtorrent API erişimi için)
+      - XMLRPC_PORT=8000
+      
+      # WebDAV portu (tamamlanan dosyalara erişim için)
+      - WEBDAV_PORT=9000
+      
+      # DHT portu (peer bulma için)
+      - RT_DHT_PORT=6881
+      
+      # Gelen bağlantı portu
+      - RT_INC_PORT=50000
+      
+      # rTorrent log seviyesi
+      - RT_LOG_LEVEL=info
+      
+      # Session kayıt aralığı (saniye) - SSD ömrünü uzatmak için
+      - RT_SESSION_SAVE_SECONDS=3600
+    
+    # Disk bölümleri (host ve container arasında paylaşılan klasörler)
+    volumes:
+      # rtorrent yapılandırma ve veritabanı
+      - ./data:/data
+      
+      # İndirilen dosyalar
+      - ./downloads:/downloads
+      
+      # Kullanıcı adı/şifre dosyaları
+      - ./passwd:/passwd
+    
+    # Process ve dosya limitleri (performans için)
+    ulimits:
+      # Maksimum process sayısı
+      nproc: 65535
+      
+      # Maksimum açık dosya sayısı
+      nofile:
+        soft: 32000
+        hard: 40000
