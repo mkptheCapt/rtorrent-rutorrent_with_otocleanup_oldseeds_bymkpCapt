@@ -119,7 +119,7 @@ crontab -e
 bash ~/rtorrent-cleanup.sh
 ```
 
-## 📚 İlgili Bağlantılar
+## 📚 İlgili Bağlantılar (rtorrent ve rutorrent için kaynak kodları yazanlara teşekkürler)
 
 - [rTorrent GitHub](https://github.com/rakshasa/rtorrent)
 - [ruTorrent GitHub](https://github.com/Novik/ruTorrent)
